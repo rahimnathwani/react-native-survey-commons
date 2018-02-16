@@ -4,8 +4,10 @@ import {View} from 'react-native';
 
 import Form from '../Form';
 import chapterPropTypes from '../../util/chapterPropTypes';
+import canSubmitChapter from '../../util/canSubmitChapter';
 import NavigationButtons from '../NavigationButtons';
 import styles from './styles';
+
 
 const Section = ({
     chapter, onChange, onPrevious, onSubmit, section
@@ -19,6 +21,7 @@ const Section = ({
         <NavigationButtons
             onBack={() => onPrevious()}
             onSubmit={() => onSubmit()}
+            disableSubmit={!canSubmitChapter(chapter, section)}
         />
     </View>
 );

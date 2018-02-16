@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {Row} from '@indec/react-native-commons';
 import {ComponentsRegistry} from '@indec/react-native-form-builder';
 import {stylePropType} from '@indec/react-native-commons/util';
 
 import canAnswerQuestion from '../../util/canAnswerQuestion';
+import QuestionMessages from '../QuestionMessages';
 
 const registry = new ComponentsRegistry();
 
@@ -19,16 +20,26 @@ const Form = ({
                     const QuestionComponent = registry.get(question.type);
                     const questionStyle = questionStyles[question.type] || {};
                     return (
-                        <QuestionComponent
-                            key={question.number}
-                            question={question}
-                            section={chapter}
-                            answer={chapter[question.name]}
-                            onChange={answer => onChange(answer)}
-                            disabled={!canAnswerQuestion(question, chapter)}
-                            style={questionStyle.style}
-                            textWithBadgeStyle={questionStyle.textWithBadgeStyle}
-                        />
+                        <View style={{flex: 1}}>
+                            <QuestionComponent
+                                key={question.number}
+                                question={question}
+                                section={chapter}
+                                answer={chapter[question.name]}
+                                onChange={answer => onChange(answer)}
+                                disabled={!canAnswerQuestion(question, chapter)}
+                                style={questionStyle.style}
+                                textWithBadgeStyle={questionStyle.textWithBadgeStyle}
+                            />
+                            {
+                                chapter[question.name] &&
+                                <QuestionMessages
+                                    answer={chapter[question.name]}
+                                    errorValidators={question.errorValidators}
+                                    warningValidators={question.warningValidators}
+                                />
+                            }
+                        </View>
                     );
                 })}
             </Row>
