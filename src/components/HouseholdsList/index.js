@@ -100,7 +100,7 @@ class HouseholdsList extends Component {
                         this.props.match.params.dwellingOrder
                     )}
                 />
-                <Title>&nbsp; Listado de hogares</Title>
+                <Title>Listado de hogares</Title>
                 <View style={styles.tableContainer}>
                     <Table columns={this.columns} data={dwelling.getHouseholds()}/>
                 </View>
