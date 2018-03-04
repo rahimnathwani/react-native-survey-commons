@@ -14,7 +14,7 @@ const QuestionMessages = ({
                 .map(v => (
                     <View style={[styles.messageContainer, styles.errorMessageContainer]}>
                         <Text style={styles.message}>
-                            {v.getErrorMessage()}
+                            {v.errorMessage()}
                         </Text>
                     </View>
                 ))
@@ -25,7 +25,7 @@ const QuestionMessages = ({
                 .map(v => (
                     <View style={[styles.messageContainer, styles.warningMessageContainer]}>
                         <Text style={styles.message}>
-                            {v.getErrorMessage()}
+                            {v.errorMessage()}
                         </Text>
                     </View>
                 ))
