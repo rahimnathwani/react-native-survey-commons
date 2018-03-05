@@ -1,12 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {Button, Col, Row} from '@indec/react-native-commons';
 import {getFontAwesome} from '@indec/react-native-commons/util';
 
 import styles from './styles';
 
-const NavigatorButtons = ({onBack, submitButtonText, onSubmit}) => (
+const alert = (props, onSubmit) => Alert.alert(
+    props.name,
+    props.description,
+    [
+        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+        {text: 'OK', onPress: () => onSubmit()}
+    ],
+    {cancelable: false}
+);
+
+const NavigatorButtons = ({
+    onBack,
+    submitButtonText,
+    props,
+    onSubmit
+}) => (
     <View style={styles.container}>
         <Row>
             <Col>
@@ -21,7 +36,7 @@ const NavigatorButtons = ({onBack, submitButtonText, onSubmit}) => (
                 <Button
                     icon={getFontAwesome('chevron-right', '#333')}
                     title={submitButtonText}
-                    onPress={onSubmit}
+                    onPress={() => alert(props, onSubmit)}
                     rounded
                 />
             </Col>
@@ -32,6 +47,10 @@ const NavigatorButtons = ({onBack, submitButtonText, onSubmit}) => (
 NavigatorButtons.propTypes = {
     onBack: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    props: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired
+    }).isRequired,
     submitButtonText: PropTypes.string
 };
 

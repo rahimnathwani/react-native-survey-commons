@@ -24,14 +24,12 @@ class MembersList extends Component {
         onViewDetection: PropTypes.func.isRequired,
         onViewDetails: PropTypes.func.isRequired,
         onAddMember: PropTypes.func.isRequired,
-        saving: PropTypes.bool,
-        showCharacteristicsButton: PropTypes.bool
+        saving: PropTypes.bool
     };
 
     static defaultProps = {
         members: null,
-        saving: false,
-        showCharacteristicsButton: true
+        saving: false
     };
 
     constructor(props) {
@@ -91,18 +89,18 @@ class MembersList extends Component {
     }
 
     renderContent() {
-        const {members, showCharacteristicsButton} = this.props;
+        const {members} = this.props;
         const {dwellingOrder, householdOrder} = this.props.match.params;
         return (
             <Fragment>
                 <View style={styles.actionButtons}>
-                    {showCharacteristicsButton && <Button
+                    <Button
                         onPress={
                             () => this.props.onViewDetails(dwellingOrder, householdOrder)
                         }
                         primary
                         title="Características habitacionales del hogar"
-                    />}
+                    />
                     <Button
                         onPress={() => this.props.onAddMember()}
                         primary
@@ -128,6 +126,10 @@ class MembersList extends Component {
                 <NavigationButtons
                     onBack={() => this.goBack()}
                     onSubmit={() => this.closeHouseholdVisit()}
+                    props={{
+                        description: 'DESCRIPTION',
+                        name: 'ATENCIÓN: FINALIZANDO EL CUESTIONARIO'
+                    }}
                     submitButtonText="Cerrar visita"
                 />
             </Fragment>
@@ -156,3 +158,4 @@ export default connect(
         )
     })
 )(MembersList);
+
