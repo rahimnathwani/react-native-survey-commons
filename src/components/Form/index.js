@@ -8,10 +8,8 @@ import {stylePropType} from '@indec/react-native-commons/util';
 import canAnswerQuestion from '../../util/canAnswerQuestion';
 import QuestionMessages from '../QuestionMessages';
 
-const registry = new ComponentsRegistry();
-
 const Form = ({
-    chapter, onChange, rows, style, questionStyles
+    chapter, onChange, rows, style, questionStyles, registry
 }) => (
     <ScrollView style={style.container}>
         {rows.map(row => (
@@ -54,13 +52,15 @@ Form.propTypes = {
     chapter: PropTypes.shape({}),
     onChange: PropTypes.func.isRequired,
     questionStyles: PropTypes.shape({}),
-    style: stylePropType
+    style: stylePropType,
+    registry: PropTypes.shape({})
 };
 
 Form.defaultProps = {
     chapter: {},
     style: {},
-    questionStyles: {}
+    questionStyles: {},
+    registry: new ComponentsRegistry()
 };
 
 export default Form;
