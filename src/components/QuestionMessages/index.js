@@ -7,7 +7,7 @@ import styles from './styles';
 const QuestionMessages = ({
     chapter, answer, errorValidators, warningValidators
 }) => (
-    <View style={styles.messagesContainer}>
+    <View>
         {
             errorValidators
                 .filter(v => v.isValid(answer, chapter))

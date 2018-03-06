@@ -1,9 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-    messagesContainer: {
-        marginTop: 7
-    },
     messageContainer: {
         marginTop: 5,
         padding: 7,
