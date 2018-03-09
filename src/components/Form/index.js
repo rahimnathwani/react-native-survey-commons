@@ -14,7 +14,10 @@ const Form = ({
     <ScrollView style={style.container}>
         {rows.map(row => (
             <Row key={row.id} style={style.row}>
-                {row.questions.map(question => {
+                {filter(
+                    row.questions,
+                    question => (question.renderValidator?question.renderValidator(question, chapter):canAnswerQuestion(question, chapter))
+                ).map(question => {
                     const QuestionComponent = registry.get(question.type);
                     const questionStyle = questionStyles[question.type] || {};
                     return (
@@ -25,7 +28,6 @@ const Form = ({
                                 section={chapter}
                                 answer={chapter[question.name]}
                                 onChange={answer => onChange(answer)}
-                                disabled={!canAnswerQuestion(question, chapter)}
                                 style={questionStyle.style}
                                 textWithBadgeStyle={questionStyle.textWithBadgeStyle}
                             />
