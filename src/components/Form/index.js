@@ -7,6 +7,7 @@ import {stylePropType} from '@indec/react-native-commons/util';
 
 import canAnswerQuestion from '../../util/canAnswerQuestion';
 import QuestionMessages from '../QuestionMessages';
+import {filter} from 'lodash';
 
 const Form = ({
     chapter, onChange, rows, style, questionStyles, registry
